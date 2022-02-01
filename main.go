@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -150,14 +151,15 @@ func authenticate(next http.Handler) http.Handler {
 
 // Route the request to the appropriate handler
 func handler(w http.ResponseWriter, r *http.Request) {
-	switch r.URL.Path {
-	case "/login":
+	p := r.URL.Path
+	if strings.HasPrefix(p, "/login") {
 		loginHandler(w, r)
-	case "/rename":
+	} else if strings.HasPrefix(p, "/rename") {
 		authenticate(http.HandlerFunc(renameHandler)).ServeHTTP(w, r)
-	case "/":
-		authenticate(http.FileServer(http.Dir(fileDir))).ServeHTTP(w, r)
-	default:
+	} else if strings.HasPrefix(p, "/view") {
+		h := authenticate(http.FileServer(http.Dir(fileDir)))
+		http.StripPrefix("/view", h).ServeHTTP(w, r)
+	} else {
 		w.WriteHeader(404)
 	}
 }

@@ -4,16 +4,16 @@ This repository contains an early prototype of Docu-me, a document storage and m
 verr basic functionality - authenticated users can view files and an administrator can rename them. We hope to expand
 this in the future.
 
-Unfortunately, shortly after deploying a preview site we noticed some very strange activity. We also received the 
+Unfortunately, shortly after deploying a preview instance we noticed some very strange activity. We also received the 
 following anonymous message:
 
-> You're devs made some serious mistakes. I can completely take over Docu-me via RCE, without even needing a user account.
+> Your devs made some serious mistakes. I can completely take over Docu-me via RCE, without even needing a user account.
 > Pay 1 BTC to wallet_address_here and I'll help you fix this.
 
 
 Unsurpisingly, we don't want to pay this mysterious and possibly malevolent actor. Instead, we hope you'll be able to
 help us work out what they might have found and help us fix it. We know you're very busy, but we hope this won't take
-more than 2-4 hours of your time at most.
+more than 2-4 hours of your time.
 
 ## Your task
 
@@ -67,7 +67,7 @@ There are 3 REST endpoints currently available:
 
 Allows authenticated users to view the files
 
-* URL: `http://localhost:9555/`
+* URL: `http://localhost:9555/view`
 * Method: `GET`
 * Headers:
   * `Authorization: Bearer <token_here>` 
