@@ -20,8 +20,8 @@ var (
 )
 
 type Token struct {
-	User string
-	Expiry time.Time
+	User      string
+	Expiry    time.Time
 	Signature []byte
 }
 
@@ -47,7 +47,6 @@ func Generate(secret []byte, duration time.Duration, user string) (string, error
 	return fmt.Sprintf("%s%s%s", head, separator, signature), nil
 }
 
-
 func Parse(input string) (*Token, error) {
 	parts := strings.Split(input, separator)
 	if len(parts) != 3 {
@@ -65,8 +64,8 @@ func Parse(input string) (*Token, error) {
 	}
 
 	return &Token{
-		User: parts[0],
-		Expiry: time.UnixMilli(expiryUnix),
+		User:      parts[0],
+		Expiry:    time.UnixMilli(expiryUnix),
 		Signature: sigBytes,
 	}, nil
 }

@@ -1,7 +1,7 @@
 # Docu-me
 
 This repository contains an early prototype of Docu-me, a document storage and management REST API. Right now it only allows
-verr basic functionality - authenticated users can view files and an administrator can rename them. We hope to expand
+very basic functionality - authenticated users can view files and an administrator can rename them. We hope to expand
 this in the future.
 
 Unfortunately, shortly after deploying a preview instance we noticed some very strange activity. We also received the 
@@ -42,10 +42,12 @@ After completing step 1 (and optionally step 2), please either:
 ## Building and running
 
 * this code is known to compile under go 1.17.2 darwin/amd. It should also run under linux or WSL
-* compilation should be as easy as running `go build -o docume main.go`
+* compilation should be as easy as running `go build -o docume main.go`. This will create a binary called `docume` in the current directory that can be run using `./docume`
 * the application relies on a 32 byte secret that should be written to `secret.txt` in the same directory the application is executed from - you can generate one by running `cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c 32 > secret.txt`
 
 ## Notes
+
+Only files in the `./files` directory should be accessible to or modifiable by any users (including `admin`).
 
 As this is pre-alpha software we're aware there are some things that need to be done before we're ready for production.
 You may spot some of the following:
@@ -85,6 +87,7 @@ Allows an admin user to rename a file
 * Headers:
   * `Authorization: Bearer <token_here>`
   * `Content-Type: application/json` 
+  
 ```json
 {
   "old": "oldfile.txt",

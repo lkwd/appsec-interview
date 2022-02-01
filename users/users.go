@@ -1,4 +1,4 @@
-// this file isn't really part of the interview exercise - it just provides a simple stub for
+// this file isn't really part of the interview exercise - it just provides a simple stub for a
 // user database. Things like having a hardcoded admin password are therefore not in scope
 
 package users
@@ -6,7 +6,7 @@ package users
 import "sync"
 
 type User struct {
-	Name string
+	Name     string
 	Password []byte
 }
 
@@ -16,7 +16,7 @@ type UserDatabase interface {
 }
 
 type userDatabase struct {
-	lock sync.RWMutex
+	lock  sync.RWMutex
 	users []User
 }
 
@@ -32,7 +32,7 @@ func (us *userDatabase) Get(name string) *User {
 }
 
 var db = userDatabase{
-	lock:  sync.RWMutex{},
+	lock: sync.RWMutex{},
 	users: []User{
 		// password below is bcrypt hash of "up6WvcAsb6iodPgVYG3SofRYoEw2ALYq"
 		{Name: "admin", Password: []byte("$2a$13$6bkw.CNTd4ZjAm8PEaIeleni6QfjXGULYtQco9ZTo2APiv31V8h8y")},

@@ -17,12 +17,12 @@ import (
 )
 
 const (
-	authprefix = "Bearer "
+	authprefix    = "Bearer "
 	authPrefixLen = 7
 )
 
 // this is the secret key used to sign session tokens. It should be 32 bytes
-var secret = func()[]byte{
+var secret = func() []byte {
 	b, err := ioutil.ReadFile("./secret.txt")
 	if err != nil {
 		panic(fmt.Sprintf("failed to read secret key: %s", err.Error()))
@@ -31,7 +31,7 @@ var secret = func()[]byte{
 }()
 
 // this is the location where the files we serve/move are
-var fileDir = func()string{
+var fileDir = func() string {
 	f, err := filepath.Abs("./files")
 	if err != nil {
 		panic(fmt.Sprintf("failed to get absolute path to file dir: %s", err.Error()))
@@ -80,9 +80,8 @@ func renameHandler(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write(o)
 }
 
-
 type LoginRequest struct {
-	Name string
+	Name     string
 	Password string
 }
 
@@ -113,7 +112,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	t, err := token.Generate(secret, time.Hour * 6, user.Name)
+	t, err := token.Generate(secret, time.Hour*6, user.Name)
 	if err != nil {
 		w.WriteHeader(500)
 		return
