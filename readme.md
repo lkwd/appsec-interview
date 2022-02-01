@@ -1,7 +1,7 @@
 # Docu-me
 
-This repository contains an early prototype of Docu-me, a document storage and management site. Right now it only allows
-ver basic functionality - authenticated users can view files and an administrator can rename them. We hope to expand
+This repository contains an early prototype of Docu-me, a document storage and management REST API. Right now it only allows
+verr basic functionality - authenticated users can view files and an administrator can rename them. We hope to expand
 this in the future.
 
 Unfortunately, shortly after deploying a preview site we noticed some very strange activity. We also received the 
